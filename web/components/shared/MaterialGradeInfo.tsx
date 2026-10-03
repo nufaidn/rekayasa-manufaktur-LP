@@ -51,7 +51,7 @@ export default function MaterialGradeInfo({
   const info = GRADE_INFO[grade as MaterialGrade] ?? GRADE_INFO["Stainless Steel"];
 
   return (
-    <div className={cn(className)}>
+    <div className={cn("relative isolate", className)}>
       <button
         type="button"
         aria-expanded={open}
@@ -72,7 +72,7 @@ export default function MaterialGradeInfo({
         />
       </button>
       {open && (
-        <div className="mt-2 rounded-lg border border-gray-200 bg-gray-50 p-3">
+        <div className="relative z-10 mt-2 rounded-lg border border-gray-200 bg-gray-50 p-3 shadow-sm">
           <p className="flex items-center gap-1 text-xs font-semibold text-navy-700">
             <Info className="h-3 w-3 text-brand" aria-hidden />
             {info.title}

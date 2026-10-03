@@ -188,8 +188,9 @@ function ProductModal({
     };
   }, [onClose]);
 
+  // Harga sengaja tidak ikut karena masih bisa berubah (PPN & negosiasi).
   const waHref = waUrlWithText(
-    `Halo Rekayasa Manufaktur, saya tertarik dengan produk ${product.name} (${product.price}). Mohon info lebih lanjut.`
+    `Halo Min!, saya tertarik dengan produk ${product.name}. Mohon info lebih lanjut.`
   );
 
   return createPortal(

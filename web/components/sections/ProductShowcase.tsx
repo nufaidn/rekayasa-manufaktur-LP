@@ -349,6 +349,17 @@ function ProductModal({
 export default function ProductShowcase() {
   const showcase = products.filter((p) => p.featured).slice(0, 8);
   const [selected, setSelected] = useState<Product | null>(null);
+  const cardRefs = useRef<Record<string, React.RefObject<HTMLElement | null>>>(
+    {}
+  );
+
+  const getCardRef = (id: string) => {
+    const existing = cardRefs.current[id];
+    if (existing) return existing;
+    const created: React.RefObject<HTMLElement | null> = { current: null };
+    cardRefs.current[id] = created;
+    return created;
+  };
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     scrollToSection(href, e);
@@ -375,6 +386,7 @@ export default function ProductShowcase() {
             {showcase.map((product) => (
               <TiltCard key={product.id} className="h-full">
                 <article
+                  ref={getCardRef(product.id)}
                   role="button"
                   tabIndex={0}
                   aria-label={`Lihat detail ${product.name}`}
@@ -422,6 +434,8 @@ export default function ProductShowcase() {
                     <MaterialGradeInfo
                       grade={product.materialGrade}
                       className="mt-3"
+                      variant="popover"
+                      containerRef={getCardRef(product.id)}
                     />
                     <div className="mt-auto flex justify-end pt-3">
                       {/* Harga disembunyikan sementara — nanti dimunculkan lagi saat
